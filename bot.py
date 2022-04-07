@@ -53,55 +53,6 @@ async def on_command_error(ctx, error):
 @client.command()
 async def servers(ctx):
   await ctx.send(len(client.guilds))
-
-from replit import db
-
-@client.command(aliases=['set announcement chnannel', 'sac'])
-async def set_announcement_channel(ctx, channel:discord.TextChannel):
-  db[ctx.guild.id] = channel.id
-  await ctx.send("Announcement channel has been set!")
-
-@set_announcement_channel.error
-async def set_announcement_channel_error(ctx, error):
-  if isinstance(error, commands.ChannelNotFound):
-    await ctx.send(f"{error.argument} doesn't exist in this server")
-
-@commands.is_owner()
-@client.command()
-async def send(ctx, news, *, message):
-  if ctx.guild.id in db.keys():
-    announcement_channel_set = False
-    if announcement_channel_set:
-      for messages_send in db.get(db.keys()):
-        embed=discord.Embed(
-          title=f"{news.capitalize()} News",
-          description=message + "\n\n@everyone",
-          color=0x5865F2
-        )
-        embed.set_footer(text="<> - Required | [] - Optional")
-
-        announcement_channel_set = True
-
-        await db.keys().send(embed=embed)
-      else:
-        for guild in client.guilds:
-          system_channel = guild.system_channel
-          embed=discord.Embed(
-            title=f"{news.capitalize()} News",
-            description=message + "\n\n@everyone",
-            color=0x5865F2
-          )
-          embed.set_footer(text="<> - Required | [] - Optional")
-          try:
-            await system_channel.send(embed=embed)
-            await ctx.reply("Message sent!")
-          except discord.Forbidden:
-            pass
-
-@send.error
-async def send_error(ctx, error):
-  if isinstance(error, commands.NotOwner):
-    await ctx.send("You're not my owner.")
     
 @client.command()
 async def help(ctx):
