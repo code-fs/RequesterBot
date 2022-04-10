@@ -78,9 +78,8 @@ async def help(ctx):
 @client.command()
 async def joke(ctx):
   async with aiohttp.ClientSession() as session:
-    async with session.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,racist,sexist,expliciy") as resp:
+    async with session.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,racist,sexist,explicit") as resp:
       joke = await resp.json()
-      print(joke)
       if joke["type"] == "single": # Print the joke
         embed = discord.Embed(
           title = "Category: " + joke["category"],
