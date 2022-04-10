@@ -92,7 +92,7 @@ async def joke(ctx):
           description = joke["setup"] + "\n" + joke["delivery"],
           color = 0x7340ff
         )
-      embed.set_footer(text="ID:" + joke['id'])
+      embed.set_footer(text="ID:" + str(joke['id']))
       await ctx.send(embed=embed)
 
 @commands.has_permissions(embed_links=True)
