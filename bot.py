@@ -558,7 +558,6 @@ async def forecast(ctx, city, hour=None):
           description=f"**-City:** {js['location']['name']}\n**-Country:** {js['location']['country']}\n**-Local Time:** {js['location']['localtime']}\n**-Max temperature in Celsius(C):** {js['forecast']['forecastday'][0]['day']['maxtemp_c']}°\n**-Max temperature in Farhenheit(F):** {js['forecast']['forecastday'][0]['day']['maxtemp_f']}°\n**-Max wind speed in kilometers per hour:** {js['forecast']['forecastday'][0]['day']['maxwind_kph']}\n**-Average relative humidity:** {js['forecast']['forecastday'][0]['day']['avghumidity']}%\n**-Chance of rain:** {js['forecast']['forecastday'][0]['day']['daily_chance_of_rain']}%\n**-Chance of snow:** {js['forecast']['forecastday'][0]['day']['daily_chance_of_snow']}%\n**-Total precipitation in Millimeters(mm):** {js['forecast']['forecastday'][0]['day']['totalprecip_mm']}\n**-Average relative visibility in Kilometers(km):** {js['forecast']['forecastday'][0]['day']['avgvis_km']}\n**-Stat:** {js['forecast']['forecastday'][0]['day']['condition']['text']}",
           color=0x003994
         )
-        await ctx.send(embed=forecast)
         alerts = []
         for alerts_loop in js['alerts']['alert']:
           alerts.append(Translator().translate(alerts_loop, dest='en'))
