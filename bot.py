@@ -78,22 +78,23 @@ async def help(ctx):
 
 @client.command()
 async def joke(ctx):
-  j = await Jokes()  # Initialise the class
-  joke = await j.get_joke(blacklist=['nsfw'])  # Retrieve a random joke
-  if joke["type"] == "single": # Print the joke
-      embed = discord.Embed(
-        title = "Category: " + joke[category],
-        description = joke["joke"],
-        color = 0x7340ff
-      )
-  else:
-      embed = discord.Embed(
-        title = "Category: " + joke[category],
-        description = joke["setup"] + "\n" + joke["delivery"],
-        color = 0x7340ff
-      )
-  embed.set_footer(text="ID:" + joke['id'])
-  await ctx.send(embed=embed)
+  async with aiohttp.ClientSession() as session:
+    async with session.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,racist,sexist,expliciy") as resp:
+      joke = await resp.json()
+      if joke["type"] == "single": # Print the joke
+        embed = discord.Embed(
+          title = "Category: " + joke[category],
+          description = joke["joke"],
+          color = 0x7340ff
+        )
+      else:
+        embed = discord.Embed(
+          title = "Category: " + joke[category],
+          description = joke["setup"] + "\n" + joke["delivery"],
+          color = 0x7340ff
+        )
+      embed.set_footer(text="ID:" + joke['id'])
+      await ctx.send(embed=embed)
 
 @commands.has_permissions(embed_links=True)
 @client.command()
