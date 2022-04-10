@@ -3,3 +3,4 @@ aiohttp
 googletrans
 Wikipedia-API
 asyncio
+jokeapi
