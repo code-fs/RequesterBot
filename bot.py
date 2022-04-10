@@ -9,6 +9,7 @@ from googletrans import Translator
 import traceback
 import sys
 import wikipediaapi
+from jokeapi import Jokes
 
 intents = discord.Intents.default()
 intents.members = True
@@ -63,7 +64,7 @@ async def help(ctx):
   )
   help.add_field(
     name="Command List",
-    value="-covid [country]\n-weather <city>\n-translate <language> <message>\n-forecast <city/country> [hour]\n-meme [subreddit]\n-astro <city>\n-quote [topic]\n-invite",
+    value="-covid [country]\n-weather <city>\n-translate <language> <message>\n-forecast <city/country> [hour]\n-meme [subreddit]\n-astro <city>\n-quote [topJoke]\n-joke\n-invite",
     inline=False
   )
   help.add_field(
@@ -74,6 +75,25 @@ async def help(ctx):
   help.set_footer(text="<> - Required | [] - Optional")
 
   await ctx.send(embed=help)
+
+@client.command()
+async def joke(ctx):
+  j = await Jokes()  # Initialise the class
+  joke = await j.get_joke(blacklist=['nsfw'])  # Retrieve a random joke
+  if joke["type"] == "single": # Print the joke
+      embed = discord.Embed(
+        title = "Category: " + joke[category],
+        description = joke["joke"],
+        color = 0xGJF4I9
+      )
+  else:
+      embed = discord.Embed(
+        title = "Category: " + joke[category],
+        description = joke["setup"] + "\n" + joke["delivery"],
+        color = 0xGJF4I9
+      )
+  embed.set_footer(text="ID:" + joke['id'])
+  await ctx.send(embed=embed)
 
 @commands.has_permissions(embed_links=True)
 @client.command()
