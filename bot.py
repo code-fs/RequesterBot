@@ -90,7 +90,7 @@ async def joke(ctx):
       embed = discord.Embed(
         title = "Category: " + joke[category],
         description = joke["setup"] + "\n" + joke["delivery"],
-        color = 0xGJF4I9
+        color = 0x7340ff
       )
   embed.set_footer(text="ID:" + joke['id'])
   await ctx.send(embed=embed)
