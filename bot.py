@@ -550,7 +550,8 @@ async def forecast(ctx, city, hour=None):
               forecast.set_thumbnail(url='https:' + js['forecast']['forecastday'][0]['hour'][0]['condition']['icon'])
               forecast.set_footer(text='Last updated on the ' + js['current']['last_updated'].replace("-", "/").replace(" ", " | "))
               await ctx.send(embed=forecast)
-              break
+            break
+          break
       else:
         forecast = discord.Embed(
           title=f"Forecast For {js['location']['name'].capitalize()}",
