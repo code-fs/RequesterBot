@@ -83,13 +83,13 @@ async def joke(ctx):
       print(joke)
       if joke["type"] == "single": # Print the joke
         embed = discord.Embed(
-          title = "Category: " + joke[category],
+          title = "Category: " + joke["category"],
           description = joke["joke"],
           color = 0x7340ff
         )
       else:
         embed = discord.Embed(
-          title = "Category: " + joke[category],
+          title = "Category: " + joke["category"],
           description = joke["setup"] + "\n" + joke["delivery"],
           color = 0x7340ff
         )
