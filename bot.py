@@ -9,7 +9,6 @@ from googletrans import Translator
 import traceback
 import sys
 import wikipediaapi
-from jokeapi import Jokes
 
 intents = discord.Intents.default()
 intents.members = True
