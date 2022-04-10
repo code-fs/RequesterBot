@@ -84,7 +84,7 @@ async def joke(ctx):
       embed = discord.Embed(
         title = "Category: " + joke[category],
         description = joke["joke"],
-        color = 0xGJF4I9
+        color = 0x7340ff
       )
   else:
       embed = discord.Embed(
