@@ -63,7 +63,7 @@ async def help(ctx):
   )
   help.add_field(
     name="Command List",
-    value="-covid [country]\n-weather <city>\n-translate <language> <message>\n-forecast <city/country> [hour]\n-meme [subreddit]\n-astro <city>\n-quote [topJoke]\n-joke\n-invite",
+    value="-covid [country]\n-weather <city>\n-act\n-forecast <city/country> [hour]\n-meme [subreddit]\n-astro <city>\n-quote [topJoke]\n-joke\n-invite",
     inline=False
   )
   help.add_field(
@@ -131,6 +131,19 @@ async def wiki(ctx, *, question):
     
   else:
     await ctx.send("Page does not exist.")
+    
+@client.command()
+async def act(ctx):
+  async with aiohttps.ClientSession().get("http://www.boredapi.com/api/activity") as resp:
+    js = resp.json()
+    embed = discord.Embed(
+      title = "You Are Bored?!",
+      description = f"Why don't you go ahead and {js["activity"].lower()}?",
+      color = 0x80b0ff
+    )
+    if js["link"] != "":
+      embed.set_url(url = js["link"])
+    await ctx.send(embed=embed)
 
 @commands.has_permissions(embed_links=True)
 @client.command()
