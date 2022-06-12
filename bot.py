@@ -136,6 +136,8 @@ async def wiki(ctx, *, question):
 async def act(ctx):
   async with aiohttps.ClientSession().get("http://www.boredapi.com/api/activity") as resp:
     js = resp.json()
+    print(js
+)
     embed = discord.Embed(
       title = "You Are Bored?!",
       description = f"Why don't you go ahead and {js["activity"].lower()}?",
