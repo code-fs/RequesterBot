@@ -139,7 +139,7 @@ async def act(ctx):
     print(js)
     embed = discord.Embed(
       title = "You Are Bored?!",
-      description = f"Why don't you go ahead and {js["activity"].lower()}?",
+      description = f"Why don't you go ahead and {js['activity'].lower()}?",
       color = 0x80b0ff
     )
     if js["link"] != "":
